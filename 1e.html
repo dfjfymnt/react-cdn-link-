@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>simple JS Tester</title>
+</head>
+<body>
+<h3>JS Function Types Tester</h3>
+<button onclick="loadExample()">Load Example</button>
+<button onclick="runCode()">Run Code</button>
+<br><br>
+<textarea id="code"rows="10" cols="60"></textarea>
+<br>
+<br>
+<div id="output"></div>
+<script>
+function load Example(){
+document.getElementByid('code').value=`sayHello();
+function sayHello(){
+console.log("Hi!");
+}
+greet();
+const greet=function(){
+console.log("Hi!");
+};
+const greetArrow=()=>{
+console.log("Hello from ArrowFunction!");
+};
+greetArrow();`;
+}
+function runCode(){
+const outputDiv=document.getElementById('output');
+outputDiv.textcontent=";
+const code=document.getElementById('code').value;
+const originalLog=console.log;
+let logs=[];
+console.log=(...args)=>logs.push(args.join("));
+try{
+eval(code);
+if(logs.length){
+outputDiv.textContent="output:\n"+logs.join('\n');
+}else{
+outputDiv.textContent="code ran successfully with no output.";
+}
+}catch(e){
+outputDiv.textContent="Error:\n"+e.message;
+}finally{console.log=originalLog;}
+}
+</script>
+</body>
+</html>

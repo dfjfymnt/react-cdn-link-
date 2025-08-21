@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>React Counter Button</title>
+<!--Load React and React DOM from CDN-->
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossoigin></script>
+<!--Load Babel to use JSX in the browser-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<!--Root div where React will render-->
+<div id="root"></div>
+<style>
+.button-group button{
+background-color:#007BFF;
+color:#ffffff;
+border:none;
+padding:10px 20px;
+margin:0 10px;
+border-radius:6px;
+font-size:1 rem;
+cursor:Pointer;
+transition:background-color 0.3s;
+}
+.button-group button:hover{
+background-color:#0056b3;
+}
+</style>
+<!--your React Code with JSX-->
+<script type="text/babel">
+class CounterButton extends React Component{
+constructor(props){
+super(props);
+this.state={
+count:0
+};
+this.increment=this.increment.bind(this);
+this.decrement=this.decrement.bind(this);
+}
+increment(){
+this.setstate({count:this.stste.count +1});
+}
+decrement(){
+this.setstate({count:this.stste.count -1});
+}
+render(){
+return(
+<div style{{textAlign:'Center',MarginTop:'50px'}}>
+<h1>Counter:{this.stste.count}</h1>
+<div ClassName="button-group">
+<button onClick ={this.increment}>Increment</button>
+<button onClick ={this.decrement}>decrement</button>
+</div>
+</div>
+);
+}
+}
+ReactDOM.render(<CounterButton/>,document.getElementById('root'));
+</script></body></html>
