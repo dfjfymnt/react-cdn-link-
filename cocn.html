@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Letter Concatenator with Order</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        text-align: center;
+        padding: 40px;
+      }
+
+      #calculator {
+        display: inline-block;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .display {
+        width: 100%;
+        font-size: 24px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        text-align: right;
+        border-radius: 6px;
+      }
+
+      .button-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 60px);
+        gap: 10px;
+        justify-content: center;
+      }
+
+      button {
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .operator {
+        background-color: #28a745;
+      }
+
+      .operator:hover {
+        background-color: #1e7e34;
+      }
+
+      .clear {
+        background-color: #dc3545;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Letter Concatenator with Order</h2>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function LetterConcatenator() {
+        const [input, setInput] = React.useState('');
+        const [order, setOrder] = React.useState([]); // Store the order of entered letters
+
+        const handleClick = (value) => {
+          if (value === 'C') {
+            setOrder([]); // Clear the order
+            setInput('');
+          } else {
+            setOrder((prevOrder) => {
+              const newOrder = [...prevOrder, value];
+              setInput(newOrder.join(' + ')); // Join the letters with '+'
+              return newOrder;
+            });
+          }
+        };
+
+        // Buttons for 'a' to 'z' and 'C' for clear
+        const buttons = [
+          'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+          'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+          'u', 'v', 'w', 'x', 'y', 'z', 'C'
+        ];
+
+        return (
+          <div id="calculator">
+            <div className="display">
+              {input || 'No letters entered'}
+            </div>
+            <div className="button-grid">
+              {buttons.map((btn) => (
+                <button
+                  key={btn}
+                  onClick={() => handleClick(btn)}
+                  className={btn === 'C' ? 'clear' : ''}
+                >
+                  {btn}
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<LetterConcatenator />);
+    </script>
+  </body>
+</html>
